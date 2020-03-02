@@ -1,0 +1,20 @@
+<div class="loader__container" *ngIf="!pokemonList.length">
+  <div class="preloader-wrapper big active" >
+    <div class="spinner-layer spinner-green-only">
+      <div class="circle-clipper left">
+        <div class="circle"></div>
+      </div><div class="gap-patch">
+        <div class="circle"></div>
+      </div><div class="circle-clipper right">
+        <div class="circle"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="grid__container" *ngIf="pokemonList.length">
+  <div class="__content" *ngFor="let pokemon of pokemonList">
+    <app-pokemon-card [pokemon]="pokemon"></app-pokemon-card>
+  </div>
+</div>
+
