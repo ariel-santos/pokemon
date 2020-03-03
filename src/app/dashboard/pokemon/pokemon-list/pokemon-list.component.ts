@@ -15,9 +15,9 @@ export class PokemonListComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.pokemonStorage = PokemonService;
-    if (this.pokemonStorage.PokemonList.length) {
-      this.pokemonList = this.pokemonStorage.PokemonList;
+    this.pokemonStorage = PokemonService.PokemonList;
+    if (this.pokemonStorage.cards.length) {
+      this.pokemonList = this.pokemonStorage.cards;
     } else {
       this.getPokemons();
     }
@@ -28,7 +28,7 @@ export class PokemonListComponent implements OnInit {
       res => {
         if (res.length) {
           const pokemonCards = res.filter( r => r.nationalPokedexNumber );
-          this.pokemonStorage.PokemonList = pokemonCards;
+          this.pokemonStorage.cards = pokemonCards;
           this.pokemonList = pokemonCards;
         }
       }, err => {

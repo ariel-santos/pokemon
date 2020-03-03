@@ -1,9 +1,11 @@
 export class PokemonStorage {
   cards: Array<Pokemon>;
   lastUpdate: Date;
+  history: Array<Pokemon>;
 
   constructor() {
     this.cards = [];
+    this.history = [];
     this.lastUpdate = new Date();
   }
 }

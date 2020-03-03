@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PokemonService } from 'src/app/_core/_services/pokemon.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 
 @Component({
   selector: 'app-pokemon-detail',
@@ -15,20 +15,35 @@ export class PokemonDetailComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private pokemonService: PokemonService
-  ) { }
+  ) {
+  }
 
   ngOnInit(): void {
-    this.pokemonId = this.route.snapshot.paramMap.get('id');
-    this.pokemonStorage = PokemonService;
-    if (this.pokemonStorage.PokemonList.length) {
-      this.pokemon = this.getPokemonDetailStorage();
-    } else {
-      this.pokemon = this.getPokemonDetail();
+    this.pokemonStorage = PokemonService.PokemonList;
+
+    this.route.params.subscribe((param) => {
+      this.pokemonId = param.id;
+
+      if (this.pokemonStorage.cards.length) {
+        this.pokemon = this.getPokemonDetailStorage();
+      } else {
+        this.pokemon = this.getPokemonDetail();
+      }
+      this.addPokemonToHistory();
+    });
+  }
+
+  addPokemonToHistory() {
+    if (this.pokemon) {
+      const findPokemon = this.pokemonStorage.history.find( pokemon => pokemon.id === this.pokemon.id);
+      if (!findPokemon) {
+        this.pokemonStorage.history.unshift(this.pokemon);
+      }
     }
   }
 
   getPokemonDetailStorage() {
-    return this.pokemonStorage.PokemonList.find( pokemon => pokemon.id === this.pokemonId);
+    return this.pokemonStorage.cards.find( pokemon => pokemon.id === this.pokemonId);
   }
 
   getPokemonDetail() {
