@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { PokemonService } from 'src/app/_core/_services/pokemon.service';
-import { PokemonStorage } from 'src/app/_core/_models/pokemon';
 
 @Component({
   selector: 'app-pokemon-list',
@@ -29,7 +28,6 @@ export class PokemonListComponent implements OnInit {
       res => {
         if (res.length) {
           const pokemonCards = res.filter( r => r.nationalPokedexNumber );
-          console.log(pokemonCards);
           this.pokemonStorage.PokemonList = pokemonCards;
           this.pokemonList = pokemonCards;
         }

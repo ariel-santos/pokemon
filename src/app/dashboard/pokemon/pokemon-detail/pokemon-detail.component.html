@@ -1,1 +1,37 @@
-<p>pokemon-detail works!</p>
+<div class="row" *ngIf="pokemon">
+  <div class="col s12 m4 l6">
+    <div class="card">
+      <div class="card-image">
+        <img [src]="pokemon.imageUrlHiRes">
+        <!-- <span class="card-title"> {{pokemon.name}} </span> -->
+      </div>
+    </div>
+  </div>
+  <div class="col s12 m4 l6 pokemon-detail__container">
+    <h2 class="teal-text"> {{pokemon.name}} </h2>
+
+      <ul >
+        <li> <b> ID:</b>  {{pokemon.id}} </li>
+        <li> <b> HP:</b>  {{pokemon.hp}} </li>
+        <li> <b> SERIES:</b>  {{pokemon.series}} </li>
+        <li> <b> TYPE:</b> {{ pokemon.types.join(', ') }} </li>
+        <li> <b> RESISTANCES:</b>
+          <ng-container *ngFor="let resistances of pokemon.resistances"> {{resistances.type}} </ng-container>
+        </li>
+        <li> <b> WEAKNESSES:</b>
+          <ng-container *ngFor="let weaknesses of pokemon.weaknesses"> {{weaknesses.type}} </ng-container>
+        </li>
+        <li> <b> ATTACKS:</b>
+          <ul *ngFor="let attack of pokemon.attacks">
+            <li> <b> Name:</b>  {{attack.name}} </li>
+            <li> <b> Cost:</b>  {{attack.name}} </li>
+            <li> <b> Damage:</b>  {{attack.damage}} </li>
+            <li> <b> Description:</b>  {{attack.text || '-'}} </li>
+          </ul>
+        </li>
+      </ul>
+
+  </div>
+
+
+</div>
