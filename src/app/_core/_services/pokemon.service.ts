@@ -22,6 +22,7 @@ export class PokemonService {
   }
 
   getPokemonById(pokemonId: string) {
-    return this.apiService.get(`/cards/${pokemonId}`);
+    return this.apiService.get(`/cards/${pokemonId}`)
+    .pipe( map( (res: any) => res.card));
   }
 }
